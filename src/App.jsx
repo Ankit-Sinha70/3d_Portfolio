@@ -4,6 +4,8 @@ import ShowcaseSection from "./sections/ShowcaseSection";
 import Navbar from "./components/Navbar";
 import FeatureCards from "./sections/FeatureCards";
 import ExperienceSection from "./sections/ExperienceSection";
+import TechStack from "./sections/TechStack";
+import Contact from "./sections/ContactUs";
 
 const App = () => {
   return (
@@ -13,6 +15,8 @@ const App = () => {
       <ShowcaseSection />
       <FeatureCards/>
       <ExperienceSection/>
+      <TechStack/>
+      <Contact/>
     </>
   );
 };
