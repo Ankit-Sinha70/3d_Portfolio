@@ -3,6 +3,7 @@ import {
   BarChartBig,
   BookOpen,
   Box,
+  BrickWall,
   Component,
   Database,
   FileCode,
@@ -16,162 +17,426 @@ import {
   Wind,
 } from "lucide-react";
 import React from "react";
-import HeaderTitle from "../components/HeaderTitle";
 
 const skills = [
-  { name: "HTML", icon: <BookOpen />, category: "Languages & Frameworks" },
-  { name: "CSS", icon: <BookOpen />, category: "Languages & Frameworks" },
-  {
-    name: "JavaScript",
-    icon: <FileCode />,
-    category: "Languages & Frameworks",
-  },
-  {
-    name: "TypeScript",
-    icon: <FileCode />,
-    category: "Languages & Frameworks",
-  },
-  { name: "React", icon: <Atom />, category: "Languages & Frameworks" },
-  { name: "Next.js", icon: <Box />, category: "Languages & Frameworks" },
-  { name: "Angular", icon: <Atom />, category: "Languages & Frameworks" },
+  { name: "HTML", icon: <BookOpen />, category: "Languages & Frameworks", color: "#E34F26" },
+  { name: "CSS", icon: <Paintbrush />, category: "Languages & Frameworks", color: "#1572B6" },
+  { name: "JavaScript", icon: <FileCode />, category: "Languages & Frameworks", color: "#F7DF1E" },
+  { name: "TypeScript", icon: <FileCode />, category: "Languages & Frameworks", color: "#3178C6" },
+  { name: "React", icon: <Atom />, category: "Languages & Frameworks", color: "#61DAFB" },
+  { name: "Next.js", icon: <Box />, category: "Languages & Frameworks", color: "#000000" },
+  { name: "Angular", icon: <Atom />, category: "Languages & Frameworks", color: "#DD0031" },
 
-  { name: "SASS", icon: <Paintbrush />, category: "Styling" },
-  { name: "TailwindCSS", icon: <Wind />, category: "Styling" },
-  { name: "Bootstrap", icon: <Layers />, category: "Styling" },
-  { name: "Chakra UI", icon: <Shapes />, category: "Styling" },
-  { name: "Radix UI", icon: <Component />, category: "Styling" },
+  { name: "SASS", icon: <Paintbrush />, category: "Styling", color: "#CC6699" },
+  { name: "Tailwind", icon: <Wind />, category: "Styling", color: "#06B6D4" },
+  { name: "Bootstrap", icon: <Layers />, category: "Styling", color: "#7952B3" },
+  { name: "Chakra UI", icon: <Shapes />, category: "Styling", color: "#319795" },
+  { name: "Radix UI", icon: <Component />, category: "Styling", color: "#8B5CF6" },
+  { name: "Material UI", icon: <BrickWall />, category: "Styling", color: "#0081CB" },
 
-  { name: "MongoDB", icon: <Database />, category: "Tools & Platforms" },
-  { name: "Firebase", icon: <Flame />, category: "Tools & Platforms" },
-  { name: "Chart.js", icon: <BarChartBig />, category: "Tools & Platforms" },
-  { name: "Webpack", icon: <Puzzle />, category: "Tools & Platforms" },
-  { name: "Postman", icon: <Send />, category: "Tools & Platforms" },
-  { name: "Prettier", icon: <Wand2 />, category: "Tools & Platforms" },
+  { name: "MongoDB", icon: <Database />, category: "Tools & Platforms", color: "#47A248" },
+  { name: "Firebase", icon: <Flame />, category: "Tools & Platforms", color: "#FFCA28" },
+  { name: "Chart.js", icon: <BarChartBig />, category: "Tools & Platforms", color: "#FF6384" },
+  { name: "Webpack", icon: <Puzzle />, category: "Tools & Platforms", color: "#8DD6F9" },
+  { name: "Postman", icon: <Send />, category: "Tools & Platforms", color: "#FF6C37" },
+  { name: "Prettier", icon: <Wand2 />, category: "Tools & Platforms", color: "#F7B93E" },
 ];
 
-const facesToShow = ["front", "back", "left", "right", "top", "bottom"];
-
-const getFaceTransform = (face, dist) => {
-  switch (face) {
-    case "front":
-      return `rotateY(0deg) translateZ(${dist}px)`;
-    case "back":
-      return `rotateY(180deg) translateZ(${dist}px)`;
-    case "left":
-      return `rotateY(-90deg) translateZ(${dist}px)`;
-    case "right":
-      return `rotateY(90deg) translateZ(${dist}px)`;
-    case "top":
-      return `rotateX(90deg) translateZ(${dist}px)`;
-    case "bottom":
-      return `rotateX(-90deg) translateZ(${dist}px)`;
-    default:
-      return "";
-  }
-};
-
-const SkillCube = ({ skill }) => {
+const SkillCard = ({ skill, index }) => {
   return (
-    <div
-      className="relative group"
+    <div 
+      className="skill-card group relative"
       style={{
-        width: "clamp(70px, 15vw, 100px)",
-        height: "clamp(70px, 15vw, 100px)",
-        perspective: "800px",
+        animationDelay: `${index * 0.1}s`,
       }}
     >
-      <div
-        className="cube transition-transform duration-700 ease-in-out"
-        style={{
-          width: "100%",
-          height: "100%",
-          transformStyle: "preserve-3d",
-          animation: "spinCube 10s linear infinite",
-        }}
-      >
-        {facesToShow.map((face) => (
-          <div
-            key={face}
-            className="cube-face absolute flex flex-col items-center justify-center text-center text-xs md:text-sm font-medium text-white border border-white/30 bg-gradient-to-br from-slate-700 to-transparent rounded-lg shadow-lg hover:scale-110 transition-all duration-300"
-            style={{
-              width: "100%",
-              height: "100%",
-              transform: getFaceTransform(face, 50),
-              backfaceVisibility: "hidden",
-            }}
+      <div className="card-inner">
+        <div className="card-front">
+          <div 
+            className="icon-container"
+            style={{ color: skill.color }}
           >
-            <div className="mb-1 text-xl">{skill.icon}</div>
-            <span>{skill.name}</span>
+            {skill.icon}
           </div>
-        ))}
+          <h3 className="skill-name">{skill.name}</h3>
+          <div 
+            className="skill-bar"
+            style={{ backgroundColor: skill.color }}
+          ></div>
+        </div>
+        <div 
+          className="card-back"
+          style={{ 
+            background: `linear-gradient(135deg, ${skill.color}20, ${skill.color}40)`,
+            borderColor: skill.color 
+          }}
+        >
+          <div 
+            className="back-icon"
+            style={{ color: skill.color }}
+          >
+            {skill.icon}
+          </div>
+          <h3 className="back-title">{skill.name}</h3>
+          <div className="skill-level">
+            <div className="level-bar">
+              <div 
+                className="level-fill"
+                style={{ backgroundColor: skill.color }}
+              ></div>
+            </div>
+            <span className="level-text">Advanced</span>
+          </div>
+        </div>
       </div>
+      
+      {/* Glow effect */}
+      <div 
+        className="glow-effect"
+        style={{ 
+          boxShadow: `0 0 40px ${skill.color}30, 0 0 80px ${skill.color}20`
+        }}
+      ></div>
     </div>
   );
 };
 
 const SkillsGrid = () => {
   const categories = Array.from(new Set(skills.map((s) => s.category)));
+  
   return (
-    <div className="space-y-16">
-      {categories.map((cat) => (
-        <div key={cat} className="text-center animate-fade-in-up">
-          <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 animate-gradient-x">
-            {cat}
+    <div className="skills-container">
+      {categories.map((category, categoryIndex) => (
+        <div key={category} className="category-section">
+          <h2 
+            className="category-title"
+            style={{ animationDelay: `${categoryIndex * 0.2}s` }}
+          >
+            {category}
           </h2>
-          <div className=" pt-10 gap-18 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:px-1 justify-items-center">
+          <div className="skills-grid">
             {skills
-              .filter((s) => s.category === cat)
-              .map((skill) => (
-                <SkillCube key={skill.name} skill={skill} />
+              .filter((s) => s.category === category)
+              .map((skill, index) => (
+                <SkillCard 
+                  key={skill.name} 
+                  skill={skill} 
+                  index={index}
+                />
               ))}
           </div>
         </div>
       ))}
-
-      <style>
-        {`
-            @keyframes spinCube {
-              0% { transform: rotateX(0deg) rotateY(0deg); }
-              100% { transform: rotateX(360deg) rotateY(360deg); }
-            }
-  
-            @keyframes fadeInUp {
-              0% { opacity: 0; transform: translateY(20px); }
-              100% { opacity: 1; transform: translateY(0); }
-            }
-  
-            .animate-fade-in-up {
-              animation: fadeInUp 0.8s ease-out;
-            }
-  
-            .animate-gradient-x {
-              background-size: 200% 200%;
-              animation: gradientX 5s ease infinite;
-            }
-  
-            @keyframes gradientX {
-              0% { background-position: 0% 50%; }
-              50% { background-position: 100% 50%; }
-              100% { background-position: 0% 50%; }
-            }
-          `}
-      </style>
     </div>
   );
 };
 
 const TechStack = () => {
   return (
-    <div id="skills" className="flex-enter section-padding">
-      <div className="w-full h-full md:px-10 px-5">
-        <HeaderTitle
-          title="My Preferred TechStack"
-          sub="🤝The Skills I Bring To The Table"
-        />
+    <div className="tech-stack-container">
+      <div className="header-section">
+        <h1 className="main-title">My Tech Stack</h1>
+        <p className="subtitle">🚀 Technologies I Work With</p>
+        <div className="title-underline"></div>
       </div>
-      <div className="w-full max-w-6xl mx-auto py-1">
-        <SkillsGrid />
-      </div>
+      <SkillsGrid />
+      
+      <style>{`
+        .tech-stack-container {
+          padding: 60px 20px;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .header-section {
+          text-align: center;
+          margin-bottom: 80px;
+          animation: fadeInDown 1s ease-out;
+        }
+
+        .main-title {
+          font-size: clamp(2.5rem, 6vw, 4rem);
+          font-weight: 800;
+          background: linear-gradient(135deg, #ffffff, #f0f0f0);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          margin-bottom: 20px;
+          text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+          font-size: 1.2rem;
+          color: rgba(255,255,255,0.9);
+          margin-bottom: 30px;
+          font-weight: 500;
+        }
+
+        .title-underline {
+          width: 100px;
+          height: 4px;
+          background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+          margin: 0 auto;
+          border-radius: 2px;
+          animation: pulse 2s infinite;
+        }
+
+        .skills-container {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .category-section {
+          margin-bottom: 80px;
+        }
+
+        .category-title {
+          font-size: 2.5rem;
+          font-weight: 700;
+          text-align: center;
+          color: white;
+          margin-bottom: 50px;
+          opacity: 0;
+          animation: fadeInUp 0.8s ease-out forwards;
+          position: relative;
+        }
+
+        .category-title::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60px;
+          height: 3px;
+          background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+          border-radius: 2px;
+        }
+
+        .skills-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 30px;
+          padding: 0 20px;
+        }
+
+        .skill-card {
+          perspective: 1000px;
+          height: 200px;
+          opacity: 0;
+          animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .card-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          transform-style: preserve-3d;
+          cursor: pointer;
+        }
+
+        .skill-card:hover .card-inner {
+          transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          backface-visibility: hidden;
+          border-radius: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+          transition: all 0.3s ease;
+        }
+
+        .card-front {
+          background: rgba(255,255,255,0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .card-back {
+          background: rgba(255,255,255,0.05);
+          backdrop-filter: blur(15px);
+          border: 2px solid;
+          transform: rotateY(180deg);
+        }
+
+        .icon-container {
+          font-size: 3rem;
+          margin-bottom: 15px;
+          transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover .icon-container {
+          transform: scale(1.1) rotate(10deg);
+        }
+
+        .skill-name {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: white;
+          margin-bottom: 15px;
+          text-align: center;
+        }
+
+        .skill-bar {
+          width: 80%;
+          height: 4px;
+          border-radius: 2px;
+          opacity: 0.8;
+          animation: expandBar 1s ease-out 0.5s forwards;
+          transform: scaleX(0);
+          transform-origin: left;
+        }
+
+        .back-icon {
+          font-size: 2.5rem;
+          margin-bottom: 15px;
+          animation: bounce 2s infinite;
+        }
+
+        .back-title {
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: white;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+
+        .skill-level {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .level-bar {
+          width: 100px;
+          height: 8px;
+          background: rgba(255,255,255,0.2);
+          border-radius: 4px;
+          overflow: hidden;
+        }
+
+        .level-fill {
+          height: 100%;
+          width: 85%;
+          border-radius: 4px;
+          animation: fillBar 1.5s ease-out;
+        }
+
+        .level-text {
+          color: white;
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+
+        .glow-effect {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 20px;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+        }
+
+        .skill-card:hover .glow-effect {
+          opacity: 1;
+        }
+
+        @keyframes fadeInDown {
+          from {
+            opacity: 0;
+            transform: translateY(-50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        @keyframes expandBar {
+          to {
+            transform: scaleX(1);
+          }
+        }
+
+        @keyframes fillBar {
+          from {
+            width: 0%;
+          }
+          to {
+            width: 85%;
+          }
+        }
+
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+          }
+          40% {
+            transform: translateY(-10px);
+          }
+          60% {
+            transform: translateY(-5px);
+          }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: scaleX(1);
+          }
+          50% {
+            transform: scaleX(1.1);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .skills-grid {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+          }
+          
+          .skill-card {
+            height: 160px;
+          }
+          
+          .icon-container {
+            font-size: 2.5rem;
+          }
+        }
+      `}</style>
     </div>
   );
 };
