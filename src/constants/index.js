@@ -26,8 +26,8 @@ const words = [
 
 const counterItems = [
   { value: 2, suffix: "+", label: "Years of Experience" },
-  { value: 10, suffix: "+", label: "Satisfied Clients" },
-  { value: 10, suffix: "+", label: "Completed Projects" },
+  { value: 5, suffix: "+", label: "Satisfied Clients" },
+  { value: 5, suffix: "+", label: "Completed Projects" },
   { value: 80, suffix: "%", label: "Client Retention Rate" },
 ];
 
@@ -144,30 +144,34 @@ const techStackIcons = [
 const expCards = [
   {
     review:
-      "Adrian brought creativity and technical expertise to the team, significantly improving our frontend performance. His work has been invaluable in delivering faster experiences.",
+      "Ankit brought design precision and frontend expertise to the restaurant management system. His responsive UI/UX work significantly elevated the overall user experience for both admin and customer sides.",
     imgPath: "/images/exp1.png",
     logoPath: "/images/logo1.png",
     title: "Frontend Developer",
-    date: "January 2023 - Present",
+    date: "January 2024 - May 2024",
     responsibilities: [
-      "Developed and maintained user-facing features for the Hostinger website.",
-      "Collaborated closely with UI/UX designers to ensure seamless user experiences.",
-      "Optimized web applications for maximum speed and scalability.",
+      "Designed and implemented responsive UIs for a restaurant management system, catering to both admin and user interfaces.",
+      "Worked closely with UX designers to ensure intuitive navigation and a seamless dining and booking experience.",
+      "Focused on performance optimization and accessibility across mobile and desktop views.",
     ],
   },
+  
   {
     review:
-      "Adrian's contributions to Docker's web applications have been outstanding. He approaches challenges with a problem-solving mindset.",
+      "Ankit's work on the full-stack e-commerce application was exemplary. He built the entire system from backend to frontend with performance, maintainability, and modern design in mind.",
     imgPath: "/images/exp2.png",
     logoPath: "/images/logo2.png",
     title: "Full Stack Developer",
-    date: "June 2020 - December 2023",
+    date: "June 2024 - October 2024",
     responsibilities: [
-      "Led the development of Docker's web applications, focusing on scalability.",
-      "Worked with backend engineers to integrate APIs seamlessly with the frontend.",
-      "Contributed to open-source projects that were used with the Docker ecosystem.",
+      "Built a full-featured e-commerce platform with secure authentication, product management, and payment integration.",
+      "Developed RESTful APIs using Node.js and Express, with MongoDB for data storage and Mongoose for schema modeling.",
+      "Implemented a responsive frontend using React, Vite, and Tailwind CSS with smooth UI/UX.",
+      "Handled cart and order management logic, including dynamic pricing, discounts, and checkout workflows.",
+      "Ensured performance optimization, code modularity, and clean architecture across the stack.",
     ],
-  },
+  }
+  
   // {
   //   review: "Adrian's work on Appwrite's mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
   //   imgPath: "/images/exp3.png",

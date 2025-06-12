@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-const GlowCard = ({ card, index, children }) => {
+const GlowCard = ({ card, index }) => {
   // refs for all the cards
   const cardRefs = useRef([]);
 
@@ -41,7 +41,7 @@ const GlowCard = ({ card, index, children }) => {
       <div className="mb-5">
         <p className="text-white-50 text-lg">{card.review}</p>
       </div>
-      {children}
+      {/* {children} */}
     </div>
   );
 };
