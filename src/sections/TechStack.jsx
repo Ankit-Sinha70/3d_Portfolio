@@ -17,6 +17,8 @@ import {
   Wind,
 } from "lucide-react";
 import React from "react";
+import SEO from "../components/SEO";
+import LazyLoad from "../components/LazyLoad";
 
 const skills = [
   { name: "HTML", icon: <BookOpen />, category: "Languages & Frameworks", color: "#E34F26" },
@@ -49,12 +51,16 @@ const SkillCard = ({ skill, index }) => {
       style={{
         animationDelay: `${index * 0.1}s`,
       }}
+      role="article"
+      aria-label={`${skill.name} skill card`}
+      tabIndex="0"
     >
       <div className="card-inner">
         <div className="card-front">
           <div 
             className="icon-container"
             style={{ color: skill.color }}
+            aria-hidden="true"
           >
             {skill.icon}
           </div>
@@ -62,6 +68,10 @@ const SkillCard = ({ skill, index }) => {
           <div 
             className="skill-bar"
             style={{ backgroundColor: skill.color }}
+            role="progressbar"
+            aria-valuenow="85"
+            aria-valuemin="0"
+            aria-valuemax="100"
           ></div>
         </div>
         <div 
@@ -133,13 +143,22 @@ const SkillsGrid = () => {
 
 const TechStack = () => {
   return (
-    <div className="tech-stack-container">
+    <section 
+      className="tech-stack-container"
+      aria-labelledby="tech-stack-title"
+    >
+      <SEO 
+        title="My Tech Stack | Portfolio"
+        description="Explore my technical skills and expertise in web development, including React, JavaScript, and various modern frameworks."
+      />
       <div className="header-section">
-        <h1 className="main-title">My Tech Stack</h1>
+        <h1 id="tech-stack-title" className="main-title">My Tech Stack</h1>
         <p className="subtitle">🚀 Technologies I Work With</p>
-        <div className="title-underline"></div>
+        <div className="title-underline" aria-hidden="true"></div>
       </div>
-      <SkillsGrid />
+      <LazyLoad>
+        <SkillsGrid />
+      </LazyLoad>
       
       <style>{`
         .tech-stack-container {
@@ -437,7 +456,7 @@ const TechStack = () => {
           }
         }
       `}</style>
-    </div>
+    </section>
   );
 };
 

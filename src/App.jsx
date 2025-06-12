@@ -7,10 +7,11 @@ import ExperienceSection from "./sections/ExperienceSection";
 import TechStack from "./sections/TechStack";
 import Contact from "./sections/ContactUs";
 import FooterSection from "./sections/FooterSection";
+import { HelmetProvider } from 'react-helmet-async';
 
 const App = () => {
   return (
-    <>
+    <HelmetProvider>
       <Navbar/>
       <Hero />
       <ShowcaseSection />
@@ -19,7 +20,7 @@ const App = () => {
       <TechStack/>
       <Contact/>
       <FooterSection/>
-    </>
+    </HelmetProvider>
   );
 };
 
