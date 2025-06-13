@@ -17,7 +17,6 @@ import {
   Wind,
 } from "lucide-react";
 import React from "react";
-import SEO from "../components/SEO";
 import LazyLoad from "../components/LazyLoad";
 
 const skills = [
@@ -147,10 +146,6 @@ const TechStack = () => {
       className="tech-stack-container"
       aria-labelledby="tech-stack-title"
     >
-      <SEO 
-        title="My Tech Stack | Portfolio"
-        description="Explore my technical skills and expertise in web development, including React, JavaScript, and various modern frameworks."
-      />
       <div className="header-section">
         <h1 id="tech-stack-title" className="main-title">My Tech Stack</h1>
         <p className="subtitle">🚀 Technologies I Work With</p>
